@@ -1,0 +1,138 @@
+ TIME COMPLEXITY :
+
+    To compare the algorithms , the concept of time complexity is used .
+    
+    Example :
+
+       suppose you have 2 algorithms to solve a problem :
+
+         1. Algorithm A - checks every element one by one .
+
+         2. Algorithm B - use smart mmethod like hashing 
+
+ BOTH GIVES THE SAME INPUT . BUT 
+         >. A TAKES MORE STEPS 
+         >. B TAKES LESS STEPS 
+  >>>  WE NEED TO COMPARE THEM WITHOUT RUNNING THEM .
+   >>> THIS COMPAPRISION METHOD IS CALLED "TIME COMPLEXTITY"
+
+ .... WHAT IS "n" :
+ 
+        n = size of input 
+
+    > whenever input grows , "n" grows .
+
+.... BIG-O NOTATION :
+
+      1. we use BIG-O  to describe time complexity .
+       
+      2. In the worst case , how much work will my algorithm do . 
+
+      3. here worst case = when input is larger or difficult .
+        
+
+..... MOST IMPORTANT TIME COMPLEXITY :
+  
+
+  1. o(1) - constant time 
+     
+       1. work does not change even if input grows .
+
+       2. Example:
+
+             take the first page of book :
+
+             . 10pages - 1 step 
+             . 1000pages - still 1 step 
+
+         CODE example:
+            lets take an array 
+
+            nums = [1,2,3,4,5,6]
+            print(nums[0])     
+
+            output: 
+               1
+
+        it does not consider how many numbers in the array it prints only the number in the 0th index .
+
+
+   2. o(n) - linear time
+          
+          1. work grows in direct proportion to input size .
+
+          2. Example :
+           
+             CALLING EVERY STUDENT IN A CLASS 
+
+               ..   10 students - 10 calls 
+               ..   100 students - 100 calls
+
+        3. CODDE EXAMPLE :
+         
+           for x in nums :
+              print(x)
+
+    
+    3. o(n^2) - quadratic time 
+
+         1. The works grrows fast coz every item is compared or used with every other item .
+
+         2. Example:
+
+              >>> Students in a class shaking hands .
+
+              >>>> if n = 3 --- about 9 handshakes 
+
+              >>> work = n * n 
+            
+              >>> that is o(n^2)
+
+         3. code example :
+
+             for i in nums :
+                for j in nums :
+                   print(i,j)
+
+
+      4. o(log n) - logrithmis time 
+
+             1. input reduces by half each step .
+
+             2. Example :
+
+                  >> guessing a number b/w 1-100 by cutting range in half time .
+
+                  >>> this is used in binary search .
+
+
+        5. o(nlogn):
+
+             1. O(n log n) means the algorithm processes all items, but repeatedly reduces the problem size by half to work faster. 
+
+             2. Example: Sorting students by height
+
+
+                        You have n students
+
+                        You want to sort them by height
+
+                        A smart method:
+
+                              Split students into two halves
+
+                              Sort each half
+
+                              Join them back
+
+                              Repeat this process
+
+                       Each time:
+
+                            You touch all students → n work
+
+                            You keep splitting into halves → log n times
+
+                      Total work = O(n log n)
+
+                      This is how merge sort works.
