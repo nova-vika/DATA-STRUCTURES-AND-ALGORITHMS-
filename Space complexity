@@ -1,0 +1,51 @@
+SPACE COMPLEXITY :
+
+   1. Space complexity tells us how much extra memory an algoorithm uses when the input size increases .
+
+ >>>>> Common Space Complexities :
+
+    1. o(1) - constant space 
+
+         ..>>  memory does not increase with input size .
+
+
+         case 1: ONE PIECE OF PAPER
+
+             Imagine you are counting students.
+
+             You use ONE paper and write just the total number.
+
+              5 students → still 1 paper
+
+              100 students → still 1 paper
+
+               You are NOT adding more papers.
+
+          >>>>>>>>> Memory does NOT increase
+
+          >>>>>>>>> This is called O(1) space
+(meaning: constant space)
+
+
+         case 2: MANY PIECES OF PAPER
+
+              Now imagine you write each student’s name on a paper.
+
+              5 students → 5 papers
+
+              100 students → 100 papers
+
+               As students increase, papers increase.
+  
+        >>>>>>>>> Memory increases
+
+        >>>>>>>>> This is called O(n) space
+
+
+>>>>Why Space Complexity is Important
+
+     * To know how much memory an algorithm needs
+
+     * To avoid programs that use too much memory
+
+     *To compare two solutions based on memory usage
