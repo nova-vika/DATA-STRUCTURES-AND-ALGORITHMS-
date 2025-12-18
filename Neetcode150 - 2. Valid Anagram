@@ -1,0 +1,130 @@
+---------------------------------------------------------2. VALID ANAGRAM -------------------------------------------------------
+
+>>>>> TWO STRINGS ARE VALID ANAGRAM IF :
+                                                                            | -----  KEY RULES  -------|
+           >>>.. They use the same letters                                  |                          |   
+           >>>.. Each letters appears the same number of times              | 1. ORDER DOESNT MATTER   |
+           >>>.. The order does not matter                                  | 2. COUNT MATTERS         |
+                                                                            | 3. LENGTH MUST BE SAME   |
+   *** EXAMPLE:                                                             |__________________________|
+
+        S = "listen"
+        T = "silent"
+    >>> same letters and same count ---->  valid anagram   
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+>>> QUESTION : Given two strings s and t, return true if the two strings are anagrams of each other, otherwise return false.
+
+>>>>> METHOD 1 : SORTING :
+
+>>. CODE :
+     
+def is_anagram(s,t):
+   return sorted(s) == sorted(t)
+
+
+EXPLANATION :
+
+STEP 1 :                                    STEP 2:                                  STEP 3:
+
+1. TAKES THE STRING "S"                    1. TAKES THE STRING "T"                 1. sorted(S) == sorted(T)
+2. BREAKS IT INTO CHARACTERS               2. BREAKS IT INTO CHARACTERS            2. COMPARE BOTH THE LIST
+3. SORT THEM ALPHABETICALLY                3. SORT THEM ALPHABETICALLY             3. IF THEY ARE SAME --> TRUE 
+                                                                                   4. OTHERWISE --> FALSE
+EX: SORTED("listen")                        EX: SORTED("silent")
+#['e','i','l','n','s','t']                  #['e','i','l','n','s','t']
+
+
+
+METHOD 2 : HASH MAP -----------------------------------------------------------------------------------------------------------
+
+>>. CODE :
+
+
+
+def is_anagram(s, t):                           # def a function
+    if len(s) != len(t):                        # first checks the length coz anagrams must have same no.of letters
+        return False
+
+    count = {}                                  # create an empty set to store how many times each letter appears . eg: {a:1,b:3}
+
+    for ch in s:                                # We go letter by letter in s.
+        if ch in count:
+            count[ch] = count[ch] + 1           # This means: If letter already exists --> increase count, If letter is new --> start with 1
+        else:
+            count[ch] = 1
+
+    for ch in t:                                 # Now we use up letters from t.
+        if ch not in count:
+            return False                         # Trying to use a letter we never had 
+        count[ch] = count[ch] - 1                #  Use one letter
+        if count[ch] < 0:                        # Used too many times
+            return False
+
+    return True                                 # If: No missing letters , No negative counts 
+                                                  >> It IS a valid anagram 
+
+
+
+
+>>>> Connect This to Valid Anagram :
+
+Step 1: First word gives apples
+s = "aab"
+
+
+You start with:
+
+a → 2 apples
+
+b → 1 apple
+
+So:
+
+count = {'a': 2, 'b': 1}
+--------------------------------------
+
+Step 2: Second word uses apples
+t = "aba"
+
+First letter = 'a'
+
+You use 1 apple
+So:
+
+a = 2 → 1
+
+
+>> This is:
+
+count['a'] -= 1
+
+Second letter = 'b'
+
+Use 1 apple:
+
+b = 1 → 0
+
+Third letter = 'a'
+
+Use 1 apple:
+
+a = 1 → 0
+
+-----------------------------------------
+Step 3: What does 0 mean?
+
+It means:
+
+You used exactly what you had.
+No extra, no missing.
+
+>>> Valid anagram 
+
+
+
+
+
+
+
