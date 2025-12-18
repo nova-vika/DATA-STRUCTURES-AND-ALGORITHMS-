@@ -1,0 +1,179 @@
+                                     1. CONTAINS DUPLICATE 
+
+question : Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
+
+
+overview :  there are 5 methods to solve this problem .
+
+         1. brute force    2. sorting   3. hash set  4. hash map  5. comparing the length . 
+
+
+>>>> methode 1 :  BRUTE FORCE -----------------------------------------------------------------------------------
+
+>>. CODE : 
+
+def ContainsDuplicate(nums):      # create a function called contains duplicate
+   n = len(nums)                   # count how many numbers are in the list
+ for i in range(n):                # pick one number (outer loop)
+     for j in range(i+1,n):        # compae it with all number after it . avoid counting the same pair twice 
+         if nums[i]==nums[j]:      # check if two numbers are same 
+             return true           # if yes > return true
+ return false                      # else >  false 
+
+
+IMPORTANT NOTE : 
+
+   >>>> time complexity :  o(n^2)   coz comparing every elementwith each other .
+   >>>> space complexity : o(1)     coz We are not storing anything extra. Just comparing numbers
+
+
+>>>>> EXAMPLE :
+
+nums = [1, 3, 5, 7]
+
+Comparisons:
+
+1 vs 3, 5, 7
+
+3 vs 5, 7
+
+5 vs 7
+
+No matches → return False
+    
+
+>>>> method 2 : SORTING -----------------------------------------------------------------------------------------
+
+>>. CODE : 
+
+def ContainsDulplicate(nums):           # create a function called contains duplicate
+   nums.sort()                           # arranging the list in ascending order
+   for i in range(1,len(nums)):          # example : if list is [1,2,3,4] >>> it gives (1,4)
+      if nums[i]==nums[i-1]:             # compare the current num with previous one 
+          return true                    # if yes > return true
+    return false                         # else >  false 
+
+
+IMPORTANT NOTE :
+    
+    >>>> time complexity : o(nlogn)  >>> coz it touches all the element at the same time it sort the list 
+    >>>> space complexity : o(1)     >>> we are modifing the original list not adding the extra space 
+        
+    >>> why we are starting from 1 means >>> we have to compare the current number with the previous one if we put 0 then 0-1 is -1
+     we didn't have that num.
+
+
+>>>> Example:
+
+[1, 2, 3, 4]
+
+
+Comparisons:
+
+2 vs 1 ❌
+
+3 vs 2 ❌
+
+4 vs 3 ❌
+
+Loop ends → Python reaches:
+
+return False
+
+
+
+>>> METHOD 3 : HASH SET --------------------------------------------------------------------------------------
+
+>>. CODE :
+
+ def ContainsDuplicate(nums):       # create a function called contains duplicate
+     seen = set{}                    # create an empty set to store seen numbers . this is like our memory .
+   for numm in nums():               # look at one number at a time 
+      if num in seen():              # ask like : have i seen this number before 
+          return true                # if yes >> true
+      seen.add(num)                  # else >> add that number in seen set 
+    return false                     # if nothing works that return false .
+
+
+>>>> IMPORTANT NOTE : 
+
+     >> time complexity : o(n)     >>> each number checked once and also very fast .
+     >> space compllexity : o(n)   >>> we store numbers in a set .
+
+
+
+>>>>> Example:
+
+nums = [5, 2, 1, 5]
+
+    Step           num	         seen           	Duplicate?
+     1	            5	        {} → {5}	           ❌
+     2	            2	        {5} → {5,2}	           ❌
+     3            	1	        {5,2} → {5,2,1}        ❌
+     4	            5	        already in set	     ✅ STOP
+
+Return True.
+
+
+
+>>>>> method 4 : HASH MAP (DICTIONARY)  -------------------------------------------------------------------------
+
+>>. CODE :
+
+def ContainsDulplicate(nums):        # create a function called contains duplicate
+    count = {}                       # Create an empty dictionary,this will store: number → how many times it appeared
+   for num in nums:                  # look at one number at a time
+      if num in count:               # ask like : have i seen this number before 
+         return true                 # if yes >> true
+      count[num] = 1                 # First time seeing this number, Save it in dictionary with count 1
+    return false                     # if nothing works that return false .
+
+
+>>>> IMPORTANT NOTE :
+
+       >>> time complexity : o(n) >>>> each number checked once and also very fast .
+       >>> space compllexity : o(n)   >>> we store numbers in a dictionary .
+
+
+>>>>> Example:
+
+nums = [4, 1, 2, 4]
+
+Step      	       num	               count dictionary	            Duplicate?
+1	                4	                    {4:1}	                  ❌
+2	                1	                  {4:1, 1:1}	              ❌
+3	                2	                 {4:1, 1:1, 2:1}	          ❌
+4	                4	               already exists	           ✅ STOP
+
+Return True.
+
+
+
+>>>>> METHOD 5 : COMPARE THE LENGTH OF SET : ------------------------------------------------------------------
+
+>>. CODE :
+
+def ContainsDulplicate(nums):
+  return len(nums) != len(set(nums))
+
+
+IMPORTANT NOTE : 
+
+   >>> time complexity : o(n)     >>> python reads all the elements to create a set .
+   >>> space compllexity : o(n)   >>> set stores unique numbers.
+
+
+>>>>> Example 1:                   >>>> Example 2:
+
+nums = [1, 2, 2]                    nums = [1, 2, 3]
+
+
+len(nums) = 3                       len(nums) = 3
+
+len(set(nums)) = 2                  len(set(nums)) = 3
+
+3 != 2 → True                       3 != 3 → False
+
+>>> Duplicate exists                >>>  No duplicates
+
+............................................................................................................................
