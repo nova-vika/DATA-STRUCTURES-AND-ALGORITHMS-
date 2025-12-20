@@ -1,0 +1,288 @@
+
+                                    3. TWO SUMS
+
+>> Problem Statement :
+
+Given an array of integers nums and an integer target, find two different indices i and j such that:
+
+nums[i] + nums[j] == target
+
+
+Conditions:
+
+>>>>. i != j
+
+>>>>. Exactly one valid pair exists
+
+>>>>. Return the smaller index first
+
+
+------>>_______________ Key Idea (Brute Force) __________________:
+
+  *** Try all possible pairs of numbers.
+
+  *** Check if their sum equals the target.
+
+  *** Return their indices when found.
+
+
+>>>  Algorithm (Step-by-Step):
+
+*** Loop through the array using index i.
+
+*** For each i, loop through the remaining elements using index j = i + 1.
+
+*** Add nums[i] and nums[j].
+
+*** If the sum equals target, return [i, j].
+
+
+🔹 Why j = i + 1?
+
+--> Ensures i != j
+
+--> Prevents using the same element twice
+
+--> Avoids duplicate pairs
+
+--> Automatically keeps smaller index first
+
+
+--------- CODE --------
+
+def TwoSums(nums,target):                       # This creates a function named twoSum
+   for i in range(len(nums)):                   # This loop picks the first index , i starts from 0 Goes till len(nums) - 1
+      for j in range(i+1,len(nums)):            # This loop picks the second index, Starts from i + 1
+        if num[i] == num[j] == target:          # Add the two numbers, Check if their sum equals target
+           return[i,j]                          # -- Return the indices of the two numbers
+                                                  -- Smaller index comes first automatically
+                                                  -- Function stops immediately after finding the answer
+
+
+---->> Example:
+
+nums = [2, 7, 11, 15]
+target = 9
+
+
+Pairs checked:
+
+2 + 7 = 9 ✅
+
+Output:
+
+[0, 1]
+
+
+---->> Time Complexity
+
+---- O(n²)
+---- Because two nested loops are used.
+
+---->> Space Complexity
+
+---- O(1)
+---- No extra space is used.
+
+
+--->. Limitations of Brute Force
+
+**** Very slow for large inputs.
+
+**** Not suitable for big arrays.
+
+**** Used only for understanding or initial explanation.
+
+
+
+_______________ HASH MAP METHOD _____________:
+
+>>>>> Key Idea (Main Logic):
+
+------- >> Instead of checking all pairs, we remember numbers we have already seen.
+
+------- >> For each number, we calculate the complement:
+
+------- >> complement = target − current_number
+
+------- >> If the complement is already seen, we found the answer.
+
+
+----> What is Complement?
+
+>>>>> Complement is the missing number needed to reach the target.
+
+Example:
+
+target = 9
+
+current number = 2
+
+complement = 7
+
+
+---->> Algorithm :
+
+>>>>> Create an empty dictionary seen.
+
+>>>>> Loop through the array using index i.
+
+>>>>> For each number:
+
+       >>>>> Calculate complement = target - nums[i]
+
+       >>>>> If complement exists in seen:
+
+       >>>>> Return [seen[complement], i]
+
+      >>>>> Otherwise: Store current number and index in seen.
+
+
+
+----->>> Important Rule
+
+*** Check first, store later
+
+*** This prevents using the same index twice (i != j).
+
+defTwoSum(nums,target):
+   seen = {}
+   for i in range(len(nums)):
+        current = nums[i]
+        complement = target - current
+        if complement in seen :
+             return(seen[commplement],i)
+        seen[current] = i 
+
+--->>  Line 1:
+def twoSum(nums, target):
+
+**** We are creating a function called twoSum
+
+**** nums → list of numbers
+
+**** target → number we want the sum to become
+
+----->>  Line 2:
+seen = {}
+
+**** Create an empty dictionary
+
+**** This dictionary will remember:
+
+**** number → index
+
+--->>  Line 3;
+for i in range(len(nums)):
+
+**** Loop through the list using index
+
+**** i starts from 0
+
+**** Goes till the last index
+
+**** Example:
+i = 0 → nums[0]
+i = 1 → nums[1]
+
+--->>  Line 4:
+current = nums[i]
+
+**** Take the number at position i
+
+**** Store it in a variable called current
+
+**** Example:
+nums = [2, 7, 11]
+i = 0 → current = 2
+
+--->>  Line 5:
+complement = target - current
+
+**** Calculate the missing number
+
+**** This number is needed to reach the target
+
+**** Example:
+target = 9
+current = 2
+complement = 7
+
+--->>  Line 6:
+if complement in seen:
+
+**** Ask a yes / no question:
+
+**** “Have I already seen this needed number before?”
+
+**** Dictionary lookup is very fast
+
+-->> Line 7:
+return [seen[complement], i]
+
+**** If answer is YES:
+
+**** seen[complement] → index of the earlier number
+
+**** i → current index
+
+**** Return them as a list
+
+**** Smaller index comes first automatically
+
+--->> Line 8:
+seen[current] = i
+
+**** If complement was NOT found:
+
+**** Store current number and its index
+
+**** Example:
+
+seen = {2: 0}
+
+------------------------- FULL DRY RUN (MOST IMPORTANT) ------------------------
+nums = [2, 7, 11, 15]
+target = 9
+
+---> START :
+seen = {}
+
+--->> i = 0
+
+current = 2
+
+complement = 7
+
+--->> Is 7 in seen? ❌ No
+
+Store → seen = {2: 0}
+
+-->> i = 1
+
+current = 7
+
+complement = 2
+
+-->> Is 2 in seen? ✅ Yes
+
+Return → [0, 1]
+
+STOP.
+---------------------------------------------------------------------------------
+________________________________________
+>> Time Complexity                      |
+                                        |
+--> O(n)                                |
+                                        |
+--> One loop through the array          |
+                                        |
+>> Space Complexity                     |
+                                        |
+---> O(n)                               |
+                                        |
+---> Extra space for hash map           |
+________________________________________|
+ 
+
+
