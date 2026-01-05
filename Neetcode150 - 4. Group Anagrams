@@ -1,0 +1,186 @@
+ 
+                                                DSA – NeetCode Lesson 4
+                                                Problem: Group Anagrams
+
+---------------------------------------
+
+-->>> Problem Statement:
+
+Given a list of strings, group all anagrams together.
+Two strings are anagrams if they have the same characters
+with the same frequency. Order does not matter.
+
+Example:
+Input  : ["eat","tea","tan","ate","nat","bat"]
+Output : [["eat","tea","ate"], ["tan","nat"], ["bat"]]
+
+------------------------------------------------
+---->> Key Observation:
+
+All anagrams have the same character frequency.
+Same frequency → same key → same group
+
+------------------------------------------------
+-->>> Approach:
+
+1. Use a dictionary to group strings.
+2. For each string, count the frequency of characters.
+3. Use the frequency (as a tuple) as the dictionary key.
+4. Add the string to its corresponding group.
+5. Return all grouped values.
+------------------------------------------------
+-->> Data Structure Used:
+
+defaultdict(list)
+- Automatically creates an empty list when a key is missing.
+
+------------------------------------------------
+--->>> Why Frequency Array Size is 26?
+
+Because there are 26 lowercase English letters
+from 'a' to 'z'.
+
+Each index in the array represents one letter:
+index 0 → 'a'
+index 1 → 'b'
+...
+index 25 → 'z'
+-----------------------------------------------------
+--->> Why We Use ord(c) − ord('a')?
+
+
+ord('a') = 97
+
+This converts characters into indices:
+'a' → 97 − 97 = 0
+'b' → 98 − 97 = 1
+...
+'z' → 122 − 97 = 25
+
+So each character maps to the correct index
+in the frequency array.
+
+------------------------------------------------------
+---->>> Why convert list to tuple?
+
+Lists are mutable (can be changed),
+so they cannot be used as dictionary keys.
+
+Tuples are immutable (cannot be changed),
+so they can be safely used as dictionary keys.
+
+Therefore, the frequency list is converted
+into a tuple before using it as a key.
+
+-------------------------------------------------------
+---->> CODE 
+
+from collections import defaultdict   # special dictionary with default values
+
+def groupAnagrams(strs):
+    res = defaultdict(list)            # key → list of anagrams
+
+    for s in strs:                     # loop through each word
+        count = [0] * 26               # frequency array for a–z
+
+        for c in s:                    # loop through each character
+            # ord('a') = 97
+            # index = ord(c) - ord('a')
+            count[ord(c) - ord('a')] += 1
+
+        # convert list to tuple (immutable, can be dictionary key)
+        res[tuple(count)].append(s)    # group the word
+
+    return list(res.values())          # return only grouped anagrams
+
+
+------------------------------------------------
+DRY RUN
+------------------------------------------------
+>>> Input:
+strs = ["eat","tea","tan","ate","nat","bat"]
+
+>>> Initial:
+res = {}
+
+Word 1: "eat"
+e → ord=101 → index=4  → count[4]=1
+a → ord=97  → index=0  → count[0]=1
+t → ord=116 → index=19 → count[19]=1
+
+>>> Final count:
+[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0]
+
+res = {
+  key1 : ["eat"]
+}
+
+>>>> Word 2: "tea"
+Same frequency as "eat" → same key
+
+res = {
+  key1 : ["eat", "tea"]
+}
+
+>>>> Word 3: "tan"
+t → index=19
+a → index=0
+n → index=13
+
+New frequency → new key
+
+res = {
+  key1 : ["eat", "tea"],
+  key2 : ["tan"]
+}
+
+>>>> Word 4: "ate"
+Same as "eat" → key1
+
+res = {
+  key1 : ["eat", "tea", "ate"],
+  key2 : ["tan"]
+}
+
+>>> Word 5: "nat"
+Same as "tan" → key2
+
+res = {
+  key1 : ["eat", "tea", "ate"],
+  key2 : ["tan", "nat"]
+}
+
+>>>> Word 6: "bat"
+b → index=1
+a → index=0
+t → index=19
+
+New key
+
+res = {
+  key1 : ["eat", "tea", "ate"],
+  key2 : ["tan", "nat"],
+  key3 : ["bat"]
+}
+
+Final Output:
+[["eat","tea","ate"], ["tan","nat"], ["bat"]]
+
+
+------------------------------------------------
+---->>> Time & Space Complexity
+------------------------------------------------
+Let:
+n = number of strings
+k = average length of string
+
+Time Complexity  : O(n × k)
+Space Complexity : O(n × k)
+------------------------------------------------
+.....One-Line Summary.....:
+
+We group anagrams using a hash map where the key is the
+character frequency tuple.
+
+------------------------------------------------
+
